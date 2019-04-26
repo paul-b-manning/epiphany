@@ -3,10 +3,10 @@
   stat:
     path: "/tmp/kafka_{{ kafka_var.scala.version }}-{{ kafka_var.version }}.tgz"
   register: kafka_check
-
+  
 - name: Fetch Kafka binary package
   get_url:
-    url: "http://apache.mirrors.tds.net/kafka/{{ kafka_var.version }}/kafka_{{ kafka_var.scala.version }}-{{ kafka_var.version }}.tgz"
+    url: "https://archive.apache.org/dist/kafka/{{ kafka_var.version }}/kafka_{{ kafka_var.scala.version }}-{{ kafka_var.version }}.tgz"
     dest: "/tmp/kafka_{{ kafka_var.scala.version }}-{{ kafka_var.version }}.tgz"
   when: not kafka_check.stat.exists
 
@@ -26,7 +26,7 @@
     name: "{{ kafka_var.user }}"
     system: yes
     group: "{{ kafka_var.group }}"
-    shell: "/sbin/nologin"
+    shell: "/usr/sbin/nologin"
 
 - name: Check for Kafka package
   stat:
